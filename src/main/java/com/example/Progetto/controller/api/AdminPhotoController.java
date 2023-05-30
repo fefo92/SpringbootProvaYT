@@ -50,9 +50,11 @@ public class AdminPhotoController {
 
     }
     @RequestMapping(value = "admin/api/photos/{id}", method = RequestMethod.DELETE)
-    public void delete(int id){
+    public void delete(@PathVariable int id){
         Boolean isDeleted = photoService.delete(id);
 
-        if (!isDeleted) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No photo found");
+        if (isDeleted == false) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No photo found");
+        }
     }
 }
