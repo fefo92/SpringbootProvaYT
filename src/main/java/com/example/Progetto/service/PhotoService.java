@@ -1,12 +1,14 @@
 package com.example.Progetto.service;
 
 import com.example.Progetto.model.Photo;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PhotoService {
+@Service("mainPhotoService")
+public class PhotoService implements IPhotoService {
     private List<Photo> list;
     private int lastId;
 
@@ -19,16 +21,19 @@ public class PhotoService {
         lastId = 3;
 
     }
+    @Override
     public Iterable<Photo> getAll(){
 
         return list ;
     }
+    @Override
     public Optional<Photo> getById(int id){
 
         Optional<Photo> photo = list.stream().filter(item -> item.getId() == id).findFirst();
 
         return photo;
     }
+    @Override
     public Photo create(Photo photo){
         lastId++;
 
@@ -39,6 +44,7 @@ public class PhotoService {
         return photo;
 
     }
+    @Override
     public Optional<Photo> update(int id, Photo photo){
         Optional<Photo> foundPhoto = list.stream().filter(item -> item.getId() == id).findFirst();
 
@@ -49,6 +55,7 @@ public class PhotoService {
         return foundPhoto;
 
     }
+    @Override
     public Boolean delete(int id){
         Optional<Photo> foundPhoto = list.stream().filter(item -> item.getId() == id).findFirst();
 

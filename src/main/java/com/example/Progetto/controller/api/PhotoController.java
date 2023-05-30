@@ -1,7 +1,11 @@
 package com.example.Progetto.controller.api;
 
 import com.example.Progetto.model.Photo;
+import com.example.Progetto.service.DBPhotoService;
+import com.example.Progetto.service.IPhotoService;
 import com.example.Progetto.service.PhotoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +17,11 @@ import java.util.Optional;
 
 @RestController
 public class PhotoController {
-
-    private PhotoService photoService;
+    @Autowired
+    @Qualifier("mainPhotoService")
+    private IPhotoService photoService;
 
     public PhotoController() {
-        photoService = new PhotoService();
     }
 
     @RequestMapping("/api/photos")
